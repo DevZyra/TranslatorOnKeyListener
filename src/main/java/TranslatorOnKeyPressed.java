@@ -15,29 +15,13 @@ public class TranslatorOnKeyPressed implements NativeKeyListener {
         if (e.getKeyCode() == NativeKeyEvent.VC_CONTROL_L) {
             control = true;
             if (f10) {
-                try {
-                    URI u = new URI("https://translate.google.pl/?hl=pl");
-
-                    Desktop d = Desktop.getDesktop();
-                    d.browse(u);
-                }
-                catch (Exception evt) {
-                    System.out.println(evt.getMessage());
-                }
+               openLink();
 
             }
         } else if (e.getKeyCode() == NativeKeyEvent.VC_F10) {
             f10 = true;
             if (control) {
-                try {
-                    URI u = new URI("https://translate.google.pl/?hl=pl");
-
-                    Desktop d = Desktop.getDesktop();
-                    d.browse(u);
-                }
-                catch (Exception evt) {
-                    System.out.println(evt.getMessage());
-                }
+                openLink();
             }
         }
     }
@@ -71,5 +55,18 @@ public class TranslatorOnKeyPressed implements NativeKeyListener {
         logger.setLevel(Level.WARNING);
         logger.setUseParentHandlers(false);
         GlobalScreen.addNativeKeyListener(new TranslatorOnKeyPressed());
+    }
+
+    private void openLink(){
+       try {
+
+           URI u = new URI("https://translate.google.pl/?hl=pl");
+
+           Desktop d = Desktop.getDesktop();
+           d.browse(u);
+
+       } catch (Exception e){
+           e.printStackTrace();
+       }
     }
 }
